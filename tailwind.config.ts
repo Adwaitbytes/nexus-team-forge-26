@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -24,6 +25,24 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				space: {
+					"50": "#E6F1FF",
+					"100": "#B3D4FF",
+					"200": "#80B7FF",
+					"300": "#4D9AFF",
+					"400": "#1A7DFF",
+					"500": "#0060E6",
+					"600": "#004BB3",
+					"700": "#003780",
+					"800": "#00234D",
+					"900": "#0A192F", // Deep space blue
+					"950": "#060F1A",
+				},
+				neon: {
+					purple: "#8B5CF6", // Neon purple
+					blue: "#00FFDD",   // Neon blue/cyan
+					pink: "#FF61EF",   // Neon pink
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -52,16 +71,6 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -69,27 +78,47 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			keyframes: {
-				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+				"accordion-down": {
+					from: { height: "0" },
+					to: { height: "var(--radix-accordion-content-height)" },
 				},
-				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
-				}
+				"accordion-up": {
+					from: { height: "var(--radix-accordion-content-height)" },
+					to: { height: "0" },
+				},
+				"float": {
+					"0%, 100%": { transform: "translateY(0)" },
+					"50%": { transform: "translateY(-10px)" },
+				},
+				"pulse-glow": {
+					"0%, 100%": { boxShadow: "0 0 15px rgba(139, 92, 246, 0.5)" },
+					"50%": { boxShadow: "0 0 25px rgba(139, 92, 246, 0.8)" },
+				},
+				"gradientMove": {
+					"0%": { backgroundPosition: "0% 50%" },
+					"50%": { backgroundPosition: "100% 50%" },
+					"100%": { backgroundPosition: "0% 50%" },
+				},
 			},
 			animation: {
-				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				"accordion-down": "accordion-down 0.2s ease-out",
+				"accordion-up": "accordion-up 0.2s ease-out",
+				"float": "float 6s ease-in-out infinite",
+				"pulse-glow": "pulse-glow 2s ease-in-out infinite",
+				"gradient": "gradientMove 6s ease infinite",
+			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'hero-pattern': 'linear-gradient(to bottom right, rgba(10, 25, 47, 0.8), rgba(23, 42, 69, 0.8)), url("/bg-grid.svg")',
+				'purple-gradient': 'linear-gradient(135deg, #8B5CF6 10%, #6E59A5 100%)',
+				'blue-gradient': 'linear-gradient(135deg, #00FFDD 10%, #0060E6 100%)',
+				'glow-gradient': 'linear-gradient(90deg, rgba(139, 92, 246, 0), rgba(139, 92, 246, 0.5), rgba(139, 92, 246, 0))',
+			},
+			dropShadow: {
+				'neon-purple': '0 0 5px rgba(139, 92, 246, 0.7)',
+				'neon-blue': '0 0 5px rgba(0, 255, 221, 0.7)',
+				'neon-pink': '0 0 5px rgba(255, 97, 239, 0.7)',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
