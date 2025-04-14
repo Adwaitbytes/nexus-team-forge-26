@@ -21,11 +21,11 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center gap-8">
           <NavLinks />
           <div className="flex items-center gap-4">
-            <Button variant="ghost" className="hover:bg-white/10 text-white">
-              Sign In
+            <Button variant="ghost" className="hover:bg-white/10 text-white" asChild>
+              <Link to="/signin">Sign In</Link>
             </Button>
-            <Button className="bg-neon-purple hover:bg-purple-600 text-white">
-              Sign Up
+            <Button className="bg-neon-purple hover:bg-purple-600 text-white" asChild>
+              <Link to="/signup">Sign Up</Link>
             </Button>
           </div>
         </div>
@@ -44,11 +44,11 @@ const Navbar: React.FC = () => {
         <div className="glassmorphism md:hidden absolute top-full left-0 right-0 p-4 flex flex-col gap-4">
           <NavLinks mobile />
           <div className="flex flex-col gap-2">
-            <Button variant="ghost" className="hover:bg-white/10 text-white w-full">
-              Sign In
+            <Button variant="ghost" className="hover:bg-white/10 text-white w-full" asChild>
+              <Link to="/signin">Sign In</Link>
             </Button>
-            <Button className="bg-neon-purple hover:bg-purple-600 text-white w-full">
-              Sign Up
+            <Button className="bg-neon-purple hover:bg-purple-600 text-white w-full" asChild>
+              <Link to="/signup">Sign Up</Link>
             </Button>
           </div>
         </div>

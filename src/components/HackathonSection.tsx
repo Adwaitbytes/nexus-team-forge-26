@@ -103,7 +103,11 @@ const HackathonSection = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+          <Button 
+            variant="outline" 
+            className="border-white/20 text-white hover:bg-white/10"
+            onClick={() => window.open("https://dorahacks.io/hackathon", "_blank")}
+          >
             View All Hackathons <ExternalLink className="ml-2 h-4 w-4" />
           </Button>
         </div>
