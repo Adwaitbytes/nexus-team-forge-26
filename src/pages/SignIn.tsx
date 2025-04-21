@@ -1,10 +1,49 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Github, Mail } from 'lucide-react';
+import { Github, Mail, Info } from 'lucide-react';
+import { useToast } from '@/components/ui/use-toast';
 
 const SignIn = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleSignIn = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    // Demo account logic - accept any credentials for demo purposes
+    setTimeout(() => {
+      setIsLoading(false);
+      toast({
+        title: "Signed in successfully",
+        description: "Welcome back to TeamUp Nexus!",
+        variant: "default",
+      });
+      navigate('/');
+    }, 1500);
+  };
+
+  const handleDemoLogin = () => {
+    setEmail('demo@example.com');
+    setPassword('password');
+    setIsLoading(true);
+    
+    setTimeout(() => {
+      setIsLoading(false);
+      toast({
+        title: "Signed in with demo account",
+        description: "Welcome to TeamUp Nexus!",
+        variant: "default",
+      });
+      navigate('/');
+    }, 1500);
+  };
+
   return (
     <div className="min-h-screen bg-space-900 text-white flex items-center justify-center p-4">
       <div className="glassmorphism p-8 rounded-2xl max-w-md w-full">
@@ -19,7 +58,7 @@ const SignIn = () => {
           <p className="text-white/70">Sign in to continue your journey</p>
         </div>
         
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSignIn}>
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium text-white/80">Email</label>
             <input
@@ -27,6 +66,8 @@ const SignIn = () => {
               type="email"
               className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-neon-purple"
               placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           
@@ -40,12 +81,28 @@ const SignIn = () => {
               type="password"
               className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-neon-purple"
               placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           
-          <Button className="w-full bg-neon-purple hover:bg-purple-600 text-white py-6">
-            Sign In
+          <Button 
+            className="w-full bg-neon-purple hover:bg-purple-600 text-white py-6"
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Signing in...' : 'Sign In'}
           </Button>
+          
+          <div className="text-center">
+            <button
+              type="button"
+              onClick={handleDemoLogin}
+              className="text-neon-purple hover:underline text-sm flex items-center justify-center gap-1 mx-auto"
+            >
+              <Info className="h-3 w-3" /> Use demo account
+            </button>
+          </div>
         </form>
         
         <div className="relative my-8">
