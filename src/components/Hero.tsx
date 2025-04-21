@@ -24,7 +24,6 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            {/* "Find Teammates" navigates to Teams page */}
             <Button 
               className="bg-neon-purple hover:bg-purple-600 text-white px-8 py-6 text-lg rounded-xl"
               asChild
@@ -33,7 +32,7 @@ const Hero = () => {
                 Find Teammates <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            {/* "Browse Hackathons" goes to Dorahacks in new tab */}
+            
             <Button 
               variant="outline" 
               className="border-white/20 text-white hover:bg-white/10 px-8 py-6 text-lg rounded-xl"
