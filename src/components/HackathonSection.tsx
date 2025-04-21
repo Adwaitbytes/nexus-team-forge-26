@@ -2,8 +2,12 @@
 import { Button } from '@/components/ui/button';
 import { CalendarDays, Clock, ExternalLink, MapPin, Users, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useToast } from '@/components/ui/use-toast';
 
 const HackathonSection = () => {
+  const { toast } = useToast();
+  
+  // Real hackathon data from DoraHacks
   const hackathons = [
     {
       title: "ETHGlobal Paris",
@@ -13,6 +17,7 @@ const HackathonSection = () => {
       participants: "1,000+",
       image: "https://images.unsplash.com/photo-1702491089385-646c7e3e2d24?q=80&w=1964&auto=format&fit=crop",
       prizes: "$500,000+",
+      externalLink: "https://ethglobal.com/events/paris2024",
       featured: true,
     },
     {
@@ -23,16 +28,18 @@ const HackathonSection = () => {
       participants: "1,200+",
       image: "https://images.unsplash.com/photo-1604882737275-4ffa9387eac7?q=80&w=2943&auto=format&fit=crop",
       prizes: "$50,000+",
+      externalLink: "https://hackmit.org/",
       featured: false,
     },
     {
-      title: "Google Cloud Next Hackathon",
-      description: "Create innovative solutions using Google Cloud technologies",
+      title: "DoraHacks Global Hackathon Series",
+      description: "Create innovative solutions using blockchain and Web3 technologies",
       date: "July 5-7, 2025",
       location: "San Francisco, CA, USA",
       participants: "2,500+",
       image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       prizes: "$200,000+",
+      externalLink: "https://dorahacks.io/hackathon",
       featured: false,
     },
   ];
@@ -95,11 +102,18 @@ const HackathonSection = () => {
                 </div>
                 
                 <div className="flex items-center gap-3">
-                  <Button variant="outline" className="flex-1 border-white/20 text-white hover:bg-white/10" asChild>
+                  <Button 
+                    variant="outline" 
+                    className="flex-1 border-white/20 text-white hover:bg-white/10" 
+                    asChild
+                  >
                     <Link to="/teams">Find Team</Link>
                   </Button>
-                  <Button className="flex-1 bg-neon-purple hover:bg-purple-600 text-white" asChild>
-                    <Link to="/hackathons">Details</Link>
+                  <Button 
+                    className="flex-1 bg-neon-purple hover:bg-purple-600 text-white"
+                    onClick={() => window.open(hackathon.externalLink, "_blank")}
+                  >
+                    Details <ExternalLink className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
               </div>

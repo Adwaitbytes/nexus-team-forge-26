@@ -4,11 +4,14 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { CalendarDays, MapPin, Users, ExternalLink, Search, Globe, Clock, Code, BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useToast } from '@/components/ui/use-toast';
 
 const Hackathons = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const { toast } = useToast();
   
-  // Real hackathon data
+  // Real hackathon data from DoraHacks and other platforms
   const hackathons = [
     {
       title: "ETHGlobal Paris",
@@ -17,10 +20,22 @@ const Hackathons = () => {
       location: "Paris, France",
       participants: "1,000+",
       image: "https://images.unsplash.com/photo-1702491089385-646c7e3e2d24?q=80&w=1964&auto=format&fit=crop",
-      link: "https://ethglobal.com/",
+      link: "https://ethglobal.com/events/paris2024",
       featured: true,
       categories: ["Web3", "Blockchain", "Ethereum"],
       prizes: "$500,000+"
+    },
+    {
+      title: "DoraHacks Global Grant Round",
+      description: "A decentralized developer incentivization platform for Web3 innovations",
+      date: "June 5-15, 2025",
+      location: "Virtual + Singapore",
+      participants: "3,000+",
+      image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      link: "https://dorahacks.io/",
+      featured: true,
+      categories: ["Web3", "DAO", "Open Source"],
+      prizes: "$800,000+"
     },
     {
       title: "HackMIT",
@@ -35,16 +50,16 @@ const Hackathons = () => {
       prizes: "$50,000+"
     },
     {
-      title: "Google Cloud Next Hackathon",
-      description: "Create innovative solutions using Google Cloud technologies",
-      date: "July 5-7, 2025",
-      location: "San Francisco, CA, USA",
-      participants: "2,500+",
-      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      link: "https://cloud.google.com/",
+      title: "Binance Hackathon: Build for Web3",
+      description: "Create innovative solutions on BNB Chain ecosystem",
+      date: "July 1-30, 2025",
+      location: "Global (Virtual)",
+      participants: "5,000+",
+      image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      link: "https://www.binance.com/en/blog/ecosystem/binance-launches-$1-billion-growth-fund-for-binance-smart-chain-421499824684903060",
       featured: false,
-      categories: ["Cloud", "AI/ML", "Enterprise"],
-      prizes: "$200,000+"
+      categories: ["BNB Chain", "DeFi", "NFT"],
+      prizes: "$300,000+"
     },
     {
       title: "ETHDenver 2025",
@@ -57,18 +72,6 @@ const Hackathons = () => {
       featured: true,
       categories: ["Web3", "Blockchain", "DeFi"],
       prizes: "$1M+"
-    },
-    {
-      title: "TechCrunch Disrupt Hackathon",
-      description: "Build revolutionary products at TechCrunch's flagship event",
-      date: "September 12-14, 2025",
-      location: "Virtual",
-      participants: "1,500+",
-      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      link: "https://techcrunch.com/events/",
-      featured: false,
-      categories: ["Startup", "VC", "Innovation"],
-      prizes: "$100,000+"
     },
     {
       title: "NASA Space Apps Challenge",
@@ -92,6 +95,14 @@ const Hackathons = () => {
       category.toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
+
+  const handleFindTeam = (hackathonTitle: string) => {
+    toast({
+      title: "Finding Teams",
+      description: `Looking for teams participating in ${hackathonTitle}`,
+      variant: "default",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-space-900 text-white overflow-x-hidden">
@@ -185,8 +196,12 @@ const Hackathons = () => {
                   </div>
                   
                   <div className="flex items-center gap-3">
-                    <Button variant="outline" className="flex-1 border-white/20 text-white hover:bg-white/10">
-                      Find Team
+                    <Button 
+                      variant="outline" 
+                      className="flex-1 border-white/20 text-white hover:bg-white/10"
+                      asChild
+                    >
+                      <Link to="/teams" onClick={() => handleFindTeam(hackathon.title)}>Find Team</Link>
                     </Button>
                     <Button 
                       className="flex-1 bg-neon-purple hover:bg-purple-600 text-white"

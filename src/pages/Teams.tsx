@@ -5,11 +5,13 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { UserPlus, Users, Search, Filter, Calendar, X } from 'lucide-react';
 import TeamCreationForm from '@/components/TeamCreationForm';
+import { useToast } from '@/components/ui/use-toast';
 
 const Teams = () => {
   const [isCreatingTeam, setIsCreatingTeam] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const { toast } = useToast();
   
   // Sample teams data
   const teams = [
@@ -53,6 +55,14 @@ const Teams = () => {
     } else {
       setSelectedFilters([...selectedFilters, filter]);
     }
+  };
+
+  const handleRequestToJoin = (teamName: string) => {
+    toast({
+      title: "Join Request Sent!",
+      description: `You've requested to join ${teamName}. The team admin will review your request.`,
+      variant: "default",
+    });
   };
 
   return (
@@ -187,7 +197,10 @@ const Teams = () => {
                         ))}
                       </div>
                       
-                      <Button className="w-full bg-neon-purple hover:bg-purple-600 text-white">
+                      <Button 
+                        className="w-full bg-neon-purple hover:bg-purple-600 text-white"
+                        onClick={() => handleRequestToJoin(team.name)}
+                      >
                         Request to Join
                       </Button>
                     </div>

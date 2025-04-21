@@ -24,7 +24,19 @@ const SignIn = () => {
         description: "Welcome back to TeamUp Nexus!",
         variant: "default",
       });
-      navigate('/');
+      
+      // Check if this is a new user (simulate by checking if email is demo@example.com)
+      if (email === 'demo@example.com') {
+        navigate('/');
+      } else {
+        // For any other email, we'll simulate a new user that needs to create a profile
+        navigate('/create-profile');
+        toast({
+          title: "Let's set up your profile",
+          description: "Complete your profile to find the perfect team match!",
+          variant: "default",
+        });
+      }
     }, 1500);
   };
 

@@ -3,8 +3,14 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Github, Linkedin, Search } from 'lucide-react';
+import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
+import { Link } from 'react-router-dom';
 
 const TeamSection = () => {
+  const { toast } = useToast();
+  const [searchQuery, setSearchQuery] = useState('');
+  
   const users = [
     {
       name: "Alex Rivera",
@@ -35,6 +41,14 @@ const TeamSection = () => {
     },
   ];
 
+  const handleConnect = (userName: string) => {
+    toast({
+      title: "Connection Request Sent!",
+      description: `You've requested to connect with ${userName}. They'll be notified shortly.`,
+      variant: "default",
+    });
+  };
+
   return (
     <section className="py-20 relative">
       <div className="container mx-auto px-4">
@@ -57,6 +71,8 @@ const TeamSection = () => {
                   type="text"
                   placeholder="Search by skills, name, or location..."
                   className="w-full bg-white/5 border border-white/10 rounded-lg py-2 pl-10 pr-4 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-neon-purple"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
             </div>
@@ -109,7 +125,10 @@ const TeamSection = () => {
                   </a>
                 </div>
 
-                <Button className="w-full bg-neon-purple hover:bg-purple-600 text-white">
+                <Button 
+                  className="w-full bg-neon-purple hover:bg-purple-600 text-white"
+                  onClick={() => handleConnect(user.name)}
+                >
                   Connect
                 </Button>
               </div>
@@ -118,8 +137,12 @@ const TeamSection = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
-            View All Team Members
+          <Button 
+            variant="outline" 
+            className="border-white/20 text-white hover:bg-white/10"
+            asChild
+          >
+            <Link to="/teams">View All Team Members</Link>
           </Button>
         </div>
       </div>
