@@ -1,13 +1,13 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Github, Mail } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Github, Mail, LogIn } from "lucide-react";
 
 const SignIn = () => {
   return (
     <div className="min-h-screen bg-space-900 text-white flex items-center justify-center p-4">
-      <div className="glassmorphism p-8 rounded-2xl max-w-md w-full">
+      <div className="glassmorphism p-8 rounded-2xl max-w-md w-full animate-fade-in">
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-8">
             <div className="h-8 w-8 rounded-full bg-neon-purple animate-pulse-glow"></div>
@@ -15,11 +15,11 @@ const SignIn = () => {
               TeamUp<span className="gradient-text">Nexus</span>
             </h1>
           </Link>
-          <h2 className="text-2xl font-bold mb-2">Welcome Back</h2>
-          <p className="text-white/70">Sign in to continue your journey</p>
+          <h2 className="text-2xl font-bold mb-2">Sign In</h2>
+          <p className="text-white/70">Start collaborating instantly.</p>
         </div>
         
-        <form className="space-y-6">
+        <form className="space-y-6" autoComplete="off" onSubmit={e => e.preventDefault()}>
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium text-white/80">Email</label>
             <input
@@ -27,27 +27,26 @@ const SignIn = () => {
               type="email"
               className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-neon-purple"
               placeholder="you@example.com"
+              disabled
             />
           </div>
-          
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label htmlFor="password" className="text-sm font-medium text-white/80">Password</label>
-              <a href="#" className="text-xs text-neon-purple hover:underline">Forgot password?</a>
+              <a href="#" className="text-xs text-neon-purple hover:underline pointer-events-none opacity-50">Forgot password?</a>
             </div>
             <input
               id="password"
               type="password"
               className="w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-neon-purple"
               placeholder="••••••••"
+              disabled
             />
           </div>
-          
-          <Button className="w-full bg-neon-purple hover:bg-purple-600 text-white py-6">
-            Sign In
+          <Button className="w-full bg-neon-purple text-white py-6 opacity-70 cursor-not-allowed" disabled>
+            <LogIn className="mr-2" /> Sign In
           </Button>
         </form>
-        
         <div className="relative my-8">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-white/10"></div>
@@ -56,7 +55,6 @@ const SignIn = () => {
             <span className="px-2 bg-space-900 text-white/50">Or continue with</span>
           </div>
         </div>
-        
         <div className="grid grid-cols-2 gap-4">
           <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
             <Github className="mr-2 h-4 w-4" /> GitHub
@@ -65,9 +63,8 @@ const SignIn = () => {
             <Mail className="mr-2 h-4 w-4" /> Google
           </Button>
         </div>
-        
         <p className="text-center mt-8 text-white/70 text-sm">
-          Don't have an account?{' '}
+          Don't have an account?{" "}
           <Link to="/signup" className="text-neon-purple hover:underline">
             Sign up
           </Link>
